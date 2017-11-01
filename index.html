@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    
+     <script>
+                
+                function requestInfo()
+                {
+                    
+                    var httpRequest = new XMLHttpRequest();
+                    httpRequest.open("GET", "/request.php?q=defintion", true);
+                    httpRequest.send();
+                    
+                    var returnText = httpRequest.responseText;
+                    
+                    var defintion = JSON.parse(<?php echo $defintion["defintion"];?>)
+                    
+                    
+                    
+                }
+                
+      </script>    
+    
+    </head>
+        <body>
+            
+            <p id="defintion"></p>
+            
+            <button type="button" onclick= "requestInfo()"> Search </button>
+        
+        </body>
+</html>

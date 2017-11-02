@@ -3,17 +3,40 @@
     <head>
     
      <script>
-                
+                window.onload;
                 function requestInfo()
                 {
-                    
+                    //let input= document.getElementsByTagName('input');
+                   // let value = input[1].value;
                     var httpRequest = new XMLHttpRequest();
-                    httpRequest.open("GET", "/request.php?q=defintion", true);
+                    httpRequest.open("GET", "/request.php",true);
+                    httpRequest.onreadystatechange = function()
+                    {
+                        if (httpRequest.readyState == 4 && httpRequest.status == 200)
+                        {
+                           // let input= document.getElementsByTagName('input');
+                            // let value = input[1].value;
+                            var response = httpRequest.responseText;
+                            var div = document.createElement('div');
+                            
+                            div.setAttribute('id', 'result');
+                            div.innerHTML = response
+                            document.body.appendChild(div);
+                            
+                            
+                        }
+                    }
+                    
+                    
                     httpRequest.send();
                     
-                    var returnText = httpRequest.responseText;
                     
-                    var defintion = JSON.parse(<?php echo $defintion["defintion"];?>)
+                    
+                    //JSON.parse(returnText);
+                    
+                    
+                    
+                   
                     
                     
                     
@@ -23,10 +46,22 @@
     
     </head>
         <body>
+            <div style="text-align: center; background-color: #BF5FFF; margin-bottom: 25px;">
+            <header style="margin: 0px; background-color: #CD919E; padding: 30px; border-radius: 0px 0px 25px 25px;">
+                <h1 id="title" style="color: maroon; font-family: Arial; text-align: center;" href="index.html"> JavaScript Dictionary</h1>
+            </header>
+            <br>
             
-            <p id="defintion"></p>
+            <form action="/request.php" name="q" method="get">
+                <input type="text"/>
+                
+                
             
-            <button type="button" onclick= "requestInfo()"> Search </button>
-        
+            </form>
+            <br>
+            <br>
+            <button type="submit" onclick= "requestInfo()" style="font-family:Lucida Console; background:#CD919E; cursor: pointer; border-radius: 20px;"> Search </button>
+             <button type="submit" onclick= "requestInfo()" style="font-family:Lucida Console; background:#CD919E; cursor: pointer; border-radius: 20px;"> Get all definitions </button>
+        </div>
         </body>
 </html>
